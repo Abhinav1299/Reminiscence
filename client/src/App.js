@@ -12,7 +12,7 @@ const App = () => {
     const styleClasses = srcStyles();
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    useEffect(() => {                       // after execution of useEffect, our store has post data, and now any component can use it.
         dispatch(getPosts());
     }, [dispatch]);
 
