@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import memories from './images/memories.png';
 import Form from './components/Form/Form';
@@ -11,10 +11,11 @@ const App = () => {
 
     const styleClasses = srcStyles();
     const dispatch = useDispatch();
+    const [currentId, setCurrentId] = useState(null);
 
     useEffect(() => {                       // after execution of useEffect, our store has post data, and now any component can use it.
         dispatch(getPosts());
-    }, [dispatch]);
+    }, [currentId, dispatch]);
 
     return (
         <Container maxWidth = "lg">
@@ -32,11 +33,11 @@ const App = () => {
                     <Grid container justifyContent='space-between' alignItems='stretch' spacing={3}>
 
                         <Grid item xs = {12} sm = {7}>
-                            <Posts/>
+                            <Posts setCurrentId = {setCurrentId}/>
                         </Grid>
 
                         <Grid item xs = {12} sm = {4}>
-                            <Form/>
+                            <Form currentId = {currentId} setCurrentId = {setCurrentId} />
                         </Grid>
                     </Grid>
                 </Container>
