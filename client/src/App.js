@@ -22,7 +22,7 @@ const App = () => {
 
             <AppBar className = {styleClasses.appBar} position='static' color='inherit'>
 
-                <Typography className = {styleClasses.heading} variant='h2' align='center'> Reminiscence </Typography> 
+                <Typography className = {`${styleClasses.heading} ${styleClasses.defHeading}`}  align='center'> Reminiscence </Typography> 
 
                 <img className={styleClasses.image} src={memories} alt='memories' height='60' />
 
@@ -30,13 +30,13 @@ const App = () => {
 
             <Grow in>
                 <Container>
-                    <Grid container justifyContent='space-between' alignItems='stretch' spacing={3}>
+                    <Grid container className={styleClasses.mainContainer} justifyContent='space-between' alignItems='stretch' spacing={3}>
 
-                        <Grid item xs = {12} sm = {7}>
+                        <Grid item xs = {12} md = {7}>
                             <Posts setCurrentId = {setCurrentId}/>
                         </Grid>
 
-                        <Grid item xs = {12} sm = {4}>
+                        <Grid item xs = {12} md = {4}>
                             <Form currentId = {currentId} setCurrentId = {setCurrentId} />
                         </Grid>
                     </Grid>
