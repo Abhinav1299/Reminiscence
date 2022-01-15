@@ -15,7 +15,7 @@ This project was developed as a part of learning MERN stack. Different features 
 ReactJs, Redux, MongoDB database, Express framework, NodeJS
 
 ## Deployment
-
+The deployment is live at: https://reminiscence1.netlify.app/
 *  React frontend deployed on Netlify
 *  Node backend deployed on Heroku
 
