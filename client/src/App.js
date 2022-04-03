@@ -1,49 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
-import memories from './images/memories.png';
-import Form from './components/Form/Form';
-import Posts from './components/Posts/Posts';
-import srcStyles from './styles'
-import { useDispatch } from 'react-redux';
-import { getPosts } from './actions/post';
+import { Container } from '@material-ui/core';
+import Navbar from './components/Navbar/Navbar';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import Auth from './components/Auth/Auth';
 
 const App = () => {
-
-    const styleClasses = srcStyles();
-    const dispatch = useDispatch();
-    const [currentId, setCurrentId] = useState(null);
-
-    useEffect(() => {                       // after execution of useEffect, our store has post data, and now any component can use it.
-        dispatch(getPosts());
-    }, [currentId, dispatch]);
-
     return (
-        <Container maxWidth = "lg">
+        <BrowserRouter>
 
-            <AppBar className = {styleClasses.appBar} position='static' color='inherit'>
+            <Container maxWidth="lg">
 
-                <Typography className = {`${styleClasses.heading} ${styleClasses.defHeading}`}  align='center'> Reminiscence </Typography> 
+                <Navbar />
 
-                <img className={styleClasses.image} src={memories} alt='memories' height='60' />
+                <Routes>
+                    <Route path='/' exact element={<Home />} />
+                    <Route path='/auth' exact element={<Auth />} />
+                </Routes>
 
-            </AppBar>
+            </Container>
 
-            <Grow in>
-                <Container>
-                    <Grid container className={styleClasses.mainContainer} justifyContent='space-between' alignItems='stretch' spacing={3}>
+        </BrowserRouter>
 
-                        <Grid item xs = {12} md = {7}>
-                            <Posts setCurrentId = {setCurrentId}/>
-                        </Grid>
-
-                        <Grid item xs = {12} md = {4}>
-                            <Form currentId = {currentId} setCurrentId = {setCurrentId} />
-                        </Grid>
-                    </Grid>
-                </Container>
-            </Grow>
-
-        </Container>
     )
 }
 
