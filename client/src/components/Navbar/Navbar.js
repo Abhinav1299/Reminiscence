@@ -14,7 +14,8 @@ const Navbar = () => {
 
             <div className={styleClasses.brandContainer}>
 
-                <Typography component={Link} to="/" className={`${styleClasses.heading} ${styleClasses.defHeading}`} align='center'> Reminiscence </Typography>
+                {/* <Typography component={Link} to="/" className={`${styleClasses.heading} ${styleClasses.defHeading}`} align='center'> Reminiscence </Typography> */}
+                <Typography component={Link} to="/" className={styleClasses.heading} variant="h2" align='center'> Reminiscence </Typography>
 
                 <img className={styleClasses.image} src={memories} alt='memories' height='60' />
 

@@ -7,12 +7,15 @@ const NavStyles = makeStyles((theme) => ({
         margin: '30px 0',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
+        padding: '10px 50px',
     },
+
     heading: {
         color: '#77aa77',
-        fontSize: '3.5rem'
+        // fontSize: '3.5rem',
+        textDecoration: 'none',
     },
     image: {
         marginLeft: '15px',
