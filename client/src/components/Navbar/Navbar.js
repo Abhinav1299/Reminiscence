@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NavStyles from './styles';
 import { AppBar, Avatar, Toolbar, Typography, Button } from '@material-ui/core';
 import memories from '../../images/memories.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Navbar = () => {
 
     const styleClasses = NavStyles();
-    const user = null;
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    let userT = useSelector(state => state.auth.authData);      // checks the redux store
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    console.log(userT);
+
+    const logout = () => {
+        dispatch({ type: 'LOGOUT' });
+        navigate('/');
+        setUser(null);
+        userT = null;
+    }
+
+    useEffect(() => {
+        const token = user?.token;
+
+        // JWT auth
+
+        setUser(JSON.parse(localStorage.getItem('profile')));
+
+    }, [userT, location]);
 
     return (
         <AppBar className={styleClasses.appBar} position='static' color='inherit'>
@@ -24,9 +47,9 @@ const Navbar = () => {
             <Toolbar className={styleClasses.Toolbar}>
                 {user ? (
                     <div className={styleClasses.profile}>
-                        <Avatar className={styleClasses.purple} alt={user.result.name} src={user.results.imageUrl}>{user.result.name.charAt(0)}</Avatar>
+                        <Avatar className={styleClasses.purple} alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
                         <Typography className={styleClasses.userName} variant="h6">{user.result.name} </Typography>
-                        <Button variant="contained" className={styleClasses.logout} color="secondary">Logout</Button>
+                        <Button variant="contained" className={styleClasses.logout} color="secondary" onClick={logout}>Logout</Button>
                     </div>
 
                 ) : (
