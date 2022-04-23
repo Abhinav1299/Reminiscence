@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import blogRoutes from './routes/postRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import dotenv from 'dotenv';
 
 const app = express();
@@ -27,3 +28,4 @@ app.get('/', (req, res) => {
 })
 
 app.use('/posts', blogRoutes);
+app.use('/user', userRoutes);
