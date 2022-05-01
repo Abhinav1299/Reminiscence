@@ -13,10 +13,11 @@ export const getPosts = async (req, res) => {
 }
 
 export const createPost = async (req, res) => {
-    const post = new postModel(req.body);
+    const post = req.body;
+    const newPost = new postModel({ ...post, creator: req.userId, createdAt: new Date().toISOString() });
     try {
-        await post.save();
-        res.status(201).json(post);
+        await newPost.save();
+        res.status(201).json(newPost);
     } catch (err) {
         res.status(409).json({ message: err.message })
     }

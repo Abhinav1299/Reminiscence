@@ -28,4 +28,4 @@ app.get('/', (req, res) => {
 })
 
 app.use('/posts', blogRoutes);
-app.use('/user', userRoutes);
+app.use('/users', userRoutes);
