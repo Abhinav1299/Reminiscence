@@ -4,33 +4,38 @@ import { AppBar, Avatar, Toolbar, Typography, Button } from '@material-ui/core';
 import memories from '../../images/memories.png';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
 
 const Navbar = () => {
 
     const styleClasses = NavStyles();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-    let userT = useSelector(state => state.auth.authData);      // checks the redux store
+    // let userT = useSelector(state => state.auth.authData);      // checks the redux store
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
 
-    console.log(userT);
+    // console.log(userT);
 
     const logout = () => {
         dispatch({ type: 'LOGOUT' });
-        navigate('/');
+        navigate('/auth');
         setUser(null);
-        userT = null;
+        // userT = null;
     }
 
     useEffect(() => {
         const token = user?.token;
 
         // JWT auth
-
+        if (token) {
+            const decodedToken = decode(token);
+            if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+        }
         setUser(JSON.parse(localStorage.getItem('profile')));
-
-    }, [userT, location]);
+    }, [location]);
+    
+    // }, [userT, location]);
 
     return (
         <AppBar className={styleClasses.appBar} position='static' color='inherit'>

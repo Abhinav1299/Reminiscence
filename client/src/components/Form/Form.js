@@ -17,17 +17,20 @@ const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
 
     const user = JSON.parse(localStorage.getItem('profile'));
+    console.log(user);
 
     useEffect(() => {
         if (post) {
             setPostData(post)
         }
-    }, [currentId])
+    // }, [currentId, post, user])
+    }, [post])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (currentId) {
+        if (currentId !==0 ) {
             dispatch(updatePost(currentId, { ...postData, name: user?.result?.name}));
         } else {
             dispatch(createPost({ ...postData, name: user?.result?.name }));
@@ -36,7 +39,7 @@ const Form = ({ currentId, setCurrentId }) => {
     }
 
     const clear = () => {
-        setCurrentId(null);
+        setCurrentId(0);
         setPostData({ title: '', message: '', tags: '', selectedFile: '' });
     }
 
