@@ -19,6 +19,8 @@ The deployment is live at: https://reminiscence1.netlify.app/
 *  React frontend deployed on Netlify
 *  Node backend deployed on Heroku
 
+Note: Updated Deployment of version 2 (https://reminiscence2.netlify.app/)
+
 
 ## Future Work to be done
 
